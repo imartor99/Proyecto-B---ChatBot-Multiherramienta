@@ -1,0 +1,19 @@
+### Webhook Chatbot Multiherramienta
+POST http://localhost:5678/webhook/chatbot
+Content-Type: application/json
+
+{
+    "pregunta": "¿Qué tiempo hace en Madrid?"
+}
+
+### Prueba API Clima OpenMeteo (Ejemplo directo)
+GET https://api.open-meteo.com/v1/forecast?latitude=40.4168&longitude=-3.7038&current=temperature_2m
+
+### Prueba API REST Countries (Ejemplo directo)
+GET https://restcountries.com/v3.1/name/spain
+
+### Prueba API Wikipedia (Ejemplo directo)
+GET https://es.wikipedia.org/api/rest_v1/page/summary/Madrid
+
+### Prueba API JokeAPI (Ejemplo directo)
+GET https://v2.jokeapi.dev/joke/Programming?lang=es

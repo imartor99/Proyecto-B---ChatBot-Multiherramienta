@@ -1,0 +1,6 @@
+node_modules/
+.env
+db_data/
+docker/n8n_data/
+docker/postgres_data/
+*.log
