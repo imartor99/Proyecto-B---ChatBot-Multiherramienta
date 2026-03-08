@@ -30,7 +30,7 @@ services:
   postgres:
     image: postgres:15-alpine
     container_name: postgres-chatbot
-    # Variables de entorno para credenciales de acceso (soporta inyección de .env)
+    # Variables de entorno para credenciales de acceso (.env)
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-chatbot_user}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-chatbot_pass}
