@@ -219,6 +219,15 @@
     {
       "parameters": {
         "url": "=https://es.wikipedia.org/api/rest_v1/page/summary/Madrid",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "MiChatbotEscolar/1.0 (contacto@ejemplo.com)"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -702,7 +711,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "32701ff5-2020-487e-93d6-6f6425632f1e",
+  "versionId": "d4a6475a-7ccd-417e-803a-4ba764b863df",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "278d4729ed0035d0f2d8d81b828030e39820d8d1617576143a89be34d49e4632"
