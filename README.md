@@ -59,4 +59,11 @@ Para arrancar el proyecto y evaluar los Casos de Uso del Chatbot consultando la 
 
 ## URL del Video Demo
 
-- 
+- https://drive.google.com/file/d/1bv4stChd1JyQi26TXU2kMlRx5f0g8UAr/view?usp=sharing
+
+
+-----------------------------------------------------------------
+
+## URL de la Pull Request
+
+- https://github.com/imartor99/Proyecto-B---ChatBot-Multiherramienta/pull/1
