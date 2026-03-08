@@ -1,0 +1,721 @@
+{
+  "name": "Chatbot Multiherramienta",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatbot",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4fa291df-888f-432a-b740-4c38f1427169",
+      "name": "Webhook",
+      "webhookId": "a7e8b729-2ed2-450c-948c-dcf540822268"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.content }}",
+                    "rightValue": "CLIMA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "a9c424c8-cd17-497b-a6c6-2b6784c06177"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Clima"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8ed6f6e3-b4d1-40c4-8a55-ae002e8df4f0",
+                    "leftValue": "={{ $json.content }}",
+                    "rightValue": "PAIS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Pais"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "04004272-e42e-4f94-acf8-522ee32a378f",
+                    "leftValue": "={{ $json.content }}",
+                    "rightValue": "WIKIPEDIA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Wikipedia"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c68f381b-5008-4acd-bbd7-ba5ad6464f97",
+                    "leftValue": "={{ $json.content }}",
+                    "rightValue": "CHISTE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Chiste"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b503dc95-ed50-41d1-b786-2181d1b91fbf",
+                    "leftValue": "={{ $json.content }}",
+                    "rightValue": "GENERAL",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "General"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "0048d9cc-8ed4-4376-be26-69e23684d25c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.open-meteo.com/v1/forecast?latitude=40.4168&longitude=-3.7038&current=temperature_2m",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        928,
+        -336
+      ],
+      "id": "c255580d-45b2-4eb8-b215-56fcac5de6d7",
+      "name": "HTTP Request CLIMA"
+    },
+    {
+      "parameters": {
+        "url": "=https://restcountries.com/v3.1/name/spain",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        928,
+        -176
+      ],
+      "id": "49572cca-6c57-4bf8-a32f-a6d3b825f33f",
+      "name": "HTTP Request1 PAIS"
+    },
+    {
+      "parameters": {
+        "url": "=https://es.wikipedia.org/api/rest_v1/page/summary/Madrid",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "MiChatbotEscolar/1.0 (contacto@ejemplo.com)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        928,
+        -32
+      ],
+      "id": "e6d3503e-2387-4313-8928-b42201acdd52",
+      "name": "HTTP Request WIKIPEDIA"
+    },
+    {
+      "parameters": {
+        "url": "=https://v2.jokeapi.dev/joke/Programming?lang=es",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        944,
+        128
+      ],
+      "id": "d3e3eafe-6041-4a58-a277-9d290ea886ef",
+      "name": "HTTP Request CHISTE"
+    },
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1376,
+        -48
+      ],
+      "id": "2d441991-d1c2-48c5-baef-4f05a00bd0cf",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "historial_chatbot",
+          "mode": "list",
+          "cachedResultName": "historial_chatbot"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pregunta_usuario": "={{ $('Webhook').item.json.body.pregunta }}",
+            "intencion_detectada": "={{ $('Ollama: Clasificador de Intención').item.json.content }}",
+            "respuesta_bot": "={{ $json.content }}",
+            "herramienta_usada": "={{ $('Merge').item.json.herramienta_usada }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pregunta_usuario",
+              "displayName": "pregunta_usuario",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "intencion_detectada",
+              "displayName": "intencion_detectada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "herramienta_usada",
+              "displayName": "herramienta_usada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "respuesta_bot",
+              "displayName": "respuesta_bot",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1904,
+        -96
+      ],
+      "id": "3eebed72-5dda-4088-a41c-120c57fd4037",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "hKmNEe9xKKZGbhZc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "353a0c25-b0b9-484a-9fff-fb15fab12244",
+              "name": "herramienta_usada",
+              "value": "API REST Countries",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        -176
+      ],
+      "id": "a226d75c-4a45-493a-9076-6adb50f830fd",
+      "name": "Edit Fields PAIS"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "92ce650b-bc99-4ea3-9bf7-17caf865e9ff",
+              "name": "herramienta_usada",
+              "value": "API OpenMeteo",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        -336
+      ],
+      "id": "a210c71f-150b-4fa0-851f-f0cbb31dc3ad",
+      "name": "Edit Fields CLIMA"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "78294014-b9d8-4793-9491-ba3c33d45805",
+              "name": "herramienta_usada",
+              "value": "API Wikipedia",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        -32
+      ],
+      "id": "00b04cfb-9982-4a5e-8981-07dcaaf3e21d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7617e4bf-8908-47d7-bba9-5ba161aa8673",
+              "name": "herramienta_usada",
+              "value": "API JokeAPI",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1104,
+        96
+      ],
+      "id": "67d47050-a203-4665-9073-8ed38470eae4",
+      "name": "Edit Fields CHISTE"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f0325fd-d05a-4744-84e4-acb1f123559e",
+              "name": "herramienta_usada",
+              "value": "Ollama",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1104,
+        304
+      ],
+      "id": "4256ac16-1743-42d0-960c-f3f8f9ac7586",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "llama3.2:latest",
+          "mode": "list",
+          "cachedResultName": "llama3.2:latest"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un clasificador de intenciones experto. Analiza la siguiente pregunta del usuario y devuelve SOLO UNA PALABRA que clasifique la intención entre estas opciones:\n- CLIMA (Si pregunta por el tiempo, temperatura, lloverá, etc).\n- PAIS (Si pregunta por datos geográficos, población, capitales, etc).\n- WIKIPEDIA (Si pregunta sobre personajes históricos, definiciones complejas, historia, etc).\n- CHISTE (Si pide que le cuenten un chiste o broma).\n- GENERAL (Para todo lo demás, saludos, preguntas sin clasificar).\n\nNo des ninguna otra explicación, SOLO LA PALABRA CLAVE en mayúsculas.\n\nPregunta del usuario: {{ $json.body.pregunta }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ab7e9bb2-68b9-4d2a-9c91-230edee0b48e",
+      "name": "Ollama: Clasificador de Intención",
+      "credentials": {
+        "ollamaApi": {
+          "id": "ianROiu2muqFKbkp",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "llama3.2:latest",
+          "mode": "list",
+          "cachedResultName": "llama3.2:latest"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un asistente conversacional útil, amable y experto. El usuario te ha hecho una pregunta. A continuación, se te proporcionan los \"Datos de Contexto\" que hemos recuperado de una herramienta externa para que puedas responderle. Si los \"Datos de Contexto\" están vacíos, significa que el usuario te está saludando o haciendo una pregunta general, por lo que debes responder de forma natural usando tu propio conocimiento. Si los \"Datos de Contexto\" contienen información (como grados celsius, un chiste, o datos de un país), redacta una respuesta muy natural y amigable usando ÚNICAMENTE esos datos para responder a la pregunta del usuario. No suenes como un robot leyendo un diccionario.\n\nPregunta del usuario:{{ $('Webhook').item.json.body.pregunta }}\n\nDatos de Contexto recuperados:\n{{ JSON.stringify($json) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        -96
+      ],
+      "id": "c2a8659e-5977-4b15-8222-d76c8cf027dc",
+      "name": "Ollama: Generador NLP de Respuesta",
+      "credentials": {
+        "ollamaApi": {
+          "id": "ianROiu2muqFKbkp",
+          "name": "Ollama account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Ollama: Clasificador de Intención",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request CLIMA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1 PAIS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request WIKIPEDIA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request CHISTE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request CLIMA": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields CLIMA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1 PAIS": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields PAIS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request WIKIPEDIA": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request CHISTE": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields CHISTE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Ollama: Generador NLP de Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields PAIS": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields CLIMA": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Edit Fields CHISTE": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Ollama: Clasificador de Intención": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama: Generador NLP de Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "24b534f5-636f-4316-9f7a-40efb633e55e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "278d4729ed0035d0f2d8d81b828030e39820d8d1617576143a89be34d49e4632"
+  },
+  "id": "8j_wnZVzXjm0L7DO6S6ZN",
+  "tags": []
+}

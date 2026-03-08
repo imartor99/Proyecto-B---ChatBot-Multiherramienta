@@ -1,19 +1,41 @@
 ### Webhook Chatbot Multiherramienta
-POST http://localhost:5678/webhook/chatbot
+
+### 1. Prueba CLIMA
+POST http://localhost:5678/webhook-test/chatbot
 Content-Type: application/json
 
 {
     "pregunta": "¿Qué tiempo hace en Madrid?"
 }
 
-### Prueba API Clima OpenMeteo (Ejemplo directo)
-GET https://api.open-meteo.com/v1/forecast?latitude=40.4168&longitude=-3.7038&current=temperature_2m
+### 2. Prueba PAIS
+POST http://localhost:5678/webhook-test/chatbot
+Content-Type: application/json
 
-### Prueba API REST Countries (Ejemplo directo)
-GET https://restcountries.com/v3.1/name/spain
+{
+    "pregunta": "Háblame sobre España"
+}
 
-### Prueba API Wikipedia (Ejemplo directo)
-GET https://es.wikipedia.org/api/rest_v1/page/summary/Madrid
+### 3. Prueba WIKIPEDIA
+POST http://localhost:5678/webhook-test/chatbot
+Content-Type: application/json
 
-### Prueba API JokeAPI (Ejemplo directo)
-GET https://v2.jokeapi.dev/joke/Programming?lang=es
+{
+    "pregunta": "¿Quién es Albert Einstein?"
+}
+
+### 4. Prueba CHISTE
+POST http://localhost:5678/webhook-test/chatbot
+Content-Type: application/json
+
+{
+    "pregunta": "Cuéntame un chiste de programación"
+}
+
+### Prueba 5: Conversación General
+POST http://localhost:5678/webhook-test/chatbot
+Content-Type: application/json
+
+{
+    "pregunta": "Hola Chatbot, ¿cómo estás hoy? ¡Me llamo Iván!"
+}
