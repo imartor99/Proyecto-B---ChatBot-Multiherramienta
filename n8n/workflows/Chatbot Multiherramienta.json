@@ -19,40 +19,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "llama3.2:latest",
-          "mode": "list",
-          "cachedResultName": "llama3.2:latest"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=Eres un clasificador de intenciones experto. Analiza la siguiente pregunta del usuario y devuelve SOLO UNA PALABRA que clasifique la intención entre estas opciones:\n- CLIMA (Si pregunta por el tiempo, temperatura, lloverá, etc).\n- PAIS (Si pregunta por datos geográficos, población, capitales, etc).\n- WIKIPEDIA (Si pregunta sobre personajes históricos, definiciones complejas, historia, etc).\n- CHISTE (Si pide que le cuenten un chiste o broma).\n- GENERAL (Para todo lo demás, saludos, preguntas sin clasificar).\n\nNo des ninguna otra explicación, SOLO LA PALABRA CLAVE en mayúsculas.\n\nPregunta del usuario: {{ $json.body.pregunta }}"
-            }
-          ]
-        },
-        "options": {
-          "temperature": 0
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.ollama",
-      "typeVersion": 1,
-      "position": [
-        208,
-        0
-      ],
-      "id": "ab7e9bb2-68b9-4d2a-9c91-230edee0b48e",
-      "name": "Message a model",
-      "credentials": {
-        "ollamaApi": {
-          "id": "ianROiu2muqFKbkp",
-          "name": "Ollama account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "rules": {
           "values": [
             {
@@ -268,38 +234,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "llama3.2:latest",
-          "mode": "list",
-          "cachedResultName": "llama3.2:latest"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=Eres un asistente conversacional útil, amable y experto. El usuario te ha hecho una pregunta. A continuación, se te proporcionan los \"Datos de Contexto\" que hemos recuperado de una herramienta externa para que puedas responderle. Si los \"Datos de Contexto\" están vacíos, significa que el usuario te está saludando o haciendo una pregunta general, por lo que debes responder de forma natural usando tu propio conocimiento. Si los \"Datos de Contexto\" contienen información (como grados celsius, un chiste, o datos de un país), redacta una respuesta muy natural y amigable usando ÚNICAMENTE esos datos para responder a la pregunta del usuario. No suenes como un robot leyendo un diccionario.\n\nPregunta del usuario:{{ $('Webhook').item.json.body.pregunta }}\n\nDatos de Contexto recuperados:\n{{ JSON.stringify($json) }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.ollama",
-      "typeVersion": 1,
-      "position": [
-        1552,
-        -96
-      ],
-      "id": "c2a8659e-5977-4b15-8222-d76c8cf027dc",
-      "name": "Message a model1",
-      "credentials": {
-        "ollamaApi": {
-          "id": "ianROiu2muqFKbkp",
-          "name": "Ollama account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "schema": {
           "__rl": true,
           "mode": "list",
@@ -315,7 +249,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "pregunta_usuario": "={{ $('Webhook').item.json.body.pregunta }}",
-            "intencion_detectada": "={{ $('Message a model').item.json.content }}",
+            "intencion_detectada": "={{ $('Ollama: Clasificador de Intención').item.json.content }}",
             "respuesta_bot": "={{ $json.content }}",
             "herramienta_usada": "={{ $('Merge').item.json.herramienta_usada }}"
           },
@@ -519,6 +453,72 @@
       ],
       "id": "4256ac16-1743-42d0-960c-f3f8f9ac7586",
       "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "llama3.2:latest",
+          "mode": "list",
+          "cachedResultName": "llama3.2:latest"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un clasificador de intenciones experto. Analiza la siguiente pregunta del usuario y devuelve SOLO UNA PALABRA que clasifique la intención entre estas opciones:\n- CLIMA (Si pregunta por el tiempo, temperatura, lloverá, etc).\n- PAIS (Si pregunta por datos geográficos, población, capitales, etc).\n- WIKIPEDIA (Si pregunta sobre personajes históricos, definiciones complejas, historia, etc).\n- CHISTE (Si pide que le cuenten un chiste o broma).\n- GENERAL (Para todo lo demás, saludos, preguntas sin clasificar).\n\nNo des ninguna otra explicación, SOLO LA PALABRA CLAVE en mayúsculas.\n\nPregunta del usuario: {{ $json.body.pregunta }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ab7e9bb2-68b9-4d2a-9c91-230edee0b48e",
+      "name": "Ollama: Clasificador de Intención",
+      "credentials": {
+        "ollamaApi": {
+          "id": "ianROiu2muqFKbkp",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "llama3.2:latest",
+          "mode": "list",
+          "cachedResultName": "llama3.2:latest"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un asistente conversacional útil, amable y experto. El usuario te ha hecho una pregunta. A continuación, se te proporcionan los \"Datos de Contexto\" que hemos recuperado de una herramienta externa para que puedas responderle. Si los \"Datos de Contexto\" están vacíos, significa que el usuario te está saludando o haciendo una pregunta general, por lo que debes responder de forma natural usando tu propio conocimiento. Si los \"Datos de Contexto\" contienen información (como grados celsius, un chiste, o datos de un país), redacta una respuesta muy natural y amigable usando ÚNICAMENTE esos datos para responder a la pregunta del usuario. No suenes como un robot leyendo un diccionario.\n\nPregunta del usuario:{{ $('Webhook').item.json.body.pregunta }}\n\nDatos de Contexto recuperados:\n{{ JSON.stringify($json) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        -96
+      ],
+      "id": "c2a8659e-5977-4b15-8222-d76c8cf027dc",
+      "name": "Ollama: Generador NLP de Respuesta",
+      "credentials": {
+        "ollamaApi": {
+          "id": "ianROiu2muqFKbkp",
+          "name": "Ollama account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -527,18 +527,7 @@
       "main": [
         [
           {
-            "node": "Message a model",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model": {
-      "main": [
-        [
-          {
-            "node": "Switch",
+            "node": "Ollama: Clasificador de Intención",
             "type": "main",
             "index": 0
           }
@@ -632,18 +621,7 @@
       "main": [
         [
           {
-            "node": "Message a model1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model1": {
-      "main": [
-        [
-          {
-            "node": "Insert rows in a table",
+            "node": "Ollama: Generador NLP de Respuesta",
             "type": "main",
             "index": 0
           }
@@ -704,6 +682,28 @@
           }
         ]
       ]
+    },
+    "Ollama: Clasificador de Intención": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama: Generador NLP de Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -711,7 +711,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "d4a6475a-7ccd-417e-803a-4ba764b863df",
+  "versionId": "24b534f5-636f-4316-9f7a-40efb633e55e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "278d4729ed0035d0f2d8d81b828030e39820d8d1617576143a89be34d49e4632"
