@@ -1,11 +1,16 @@
+# Nombre del proyecto para aislar los contenedores en la red de Docker
 name: proyecto-b-chatbot
 
+# Definición de los servicios (contenedores) que componen la aplicación
 services:
+  # Orquestador visual de flujos de trabajo (n8n)
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n-chatbot
+    # Mapeo del puerto para acceder a la interfaz web (Host:Contenedor)
     ports:
       - "5678:5678"
+    # Variables de entorno para configuración del servidor n8n
     environment:
       - N8N_HOST=localhost
       - N8N_PORT=5678
@@ -13,21 +18,27 @@ services:
       - NODE_ENV=production
       - WEBHOOK_URL=http://localhost:5678/
       - GENERIC_TIMEZONE=Europe/Madrid
+    # Volumen persistente para guardar flujos y credenciales internamente
     volumes:
       - n8n_data:/home/node/.n8n
+    # Reiniciar automáticamente a menos que el usuario lo detenga
     restart: unless-stopped
     networks:
       - chatbot_net
 
+  # Base de datos relacional para el almacenamiento del historial de chats
   postgres:
     image: postgres:15-alpine
     container_name: postgres-chatbot
+    # Variables de entorno para credenciales de acceso (soporta inyección de .env)
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-chatbot_user}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-chatbot_pass}
       - POSTGRES_DB=${POSTGRES_DB:-chatbot_db}
+    # Mapeo del puerto de PostgreSQL al entorno local
     ports:
       - "5432:5432"
+    # Volúmenes: persistencia de datos reales e inyección de script de inicio (init.sql)
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./../postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -35,10 +46,12 @@ services:
     networks:
       - chatbot_net
 
+# Declaración de los volúmenes físicos en Docker para evitar pérdida de datos
 volumes:
   n8n_data:
   postgres_data:
 
+# Declaración de la red interna compartida para comunicación entre servicios
 networks:
   chatbot_net:
     driver: bridge
