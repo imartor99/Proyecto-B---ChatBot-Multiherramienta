@@ -32,10 +32,10 @@ Content-Type: application/json
     "pregunta": "Cuéntame un chiste de programación"
 }
 
-### 5. Prueba GENERAL (Habla directo el LLM sin APIs)
+### Prueba 5: Conversación General
 POST http://localhost:5678/webhook-test/chatbot
 Content-Type: application/json
 
 {
-    "pregunta": "¿Qué es la inteligencia artificial?"
+    "pregunta": "Hola Chatbot, ¿cómo estás hoy? ¡Me llamo Iván!"
 }
