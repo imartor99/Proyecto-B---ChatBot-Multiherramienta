@@ -2,14 +2,14 @@
 
 Este proyecto implementa un asistente conversacional capaz de analizar intenciones y decidir qué API externa consultar (clima, países, Wikipedia, chistes) utilizando n8n como orquestador y Ollama como modelo de lenguaje local.
 
-## 🚀 Arquitectura
+## Arquitectura
 
 - **n8n:** Orquestador visual de workflows.
 - **Ollama:** Análisis de intenciones y generación de texto natural.
 - **PostgreSQL:** Persistencia del historial conversacional.
 - **APIs Externas:** OpenMeteo, REST Countries, Wikipedia, JokeAPI.
 
-## 🛠 Instalación y Configuración
+## Instalación y Configuración
 
 1. Clonar el repositorio.
 2. Copiar `docker/.env.example` a `docker/.env`.
@@ -24,7 +24,7 @@ Este proyecto implementa un asistente conversacional capaz de analizar intencion
    ```
 5. Importar el workflow desde `n8n/workflows/chatbot-multiherramienta.json` a n8n.
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 - `docker/`: Configuración de contenedores.
 - `n8n/`: Workflows exportados.
@@ -32,7 +32,7 @@ Este proyecto implementa un asistente conversacional capaz de analizar intencion
 - `tests/`: Pruebas de API vía HTTP.
 - `docs/`: Documentación y demostración.
 
-## ✅ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 - [ ] Análisis de intención con Ollama.
 - [ ] Enrutamiento con nodo Switch de n8n.
